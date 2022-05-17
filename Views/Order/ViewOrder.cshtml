@@ -1,0 +1,116 @@
+﻿@model Online_Medicine_Shopping_Website.Models.order
+@{
+    ViewBag.Title = "ViewOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    float newPrice = 0;
+    float totalProductCost = 0;
+    float totlaOrderCost = 0;
+}
+
+<div style="background-color:#efefef" class="jumbotron">
+    <div class="row">
+
+        <div style="width:70%" class="col-md-4">
+            <table class="table table-striped table-hover ">
+                <thead>
+                    <tr class="header">
+
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Discount</th>
+                        <th>totalCost</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var i in Model.Products)
+                    {
+                        newPrice = i.Price - ((i.Price / 100) * i.Discount);
+                        totalProductCost = i.Quantity * newPrice;
+                        <tr class="warning">
+
+                            <td style="vertical-align: middle;"> @i.Name</td>
+                            <td style="vertical-align: middle;"> @i.Price LE</td>
+                            <td style="vertical-align: middle;"> @i.Quantity</td>
+                            <td style="vertical-align: middle;"> @i.Discount % off</td>
+                            <td style="vertical-align: middle;"> @totalProductCost LE</td>
+                            <td>@Html.ActionLink("More", "ProductDetails", "Product", new { Id = @i.Id }, new { @class = "btn btn-primary btn-sm" })</td>
+
+                        </tr>
+                        totlaOrderCost += totalProductCost;
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+        <div style="width:30%" class="col-md-4">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Order Details</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped table-hover ">
+
+                        <tbody>
+                            <tr class="">
+                                <td style="vertical-align: middle;">Date</td>
+                                <td style="vertical-align: middle;">@Model.date</td>
+                            </tr>
+                            <tr class="">
+                                <td style="vertical-align: middle;">State</td>
+                                <td style="vertical-align: middle;">@Model.state</td>
+                            </tr>
+                            <tr class="">
+                                <td style="vertical-align: middle;">Total cost</td>
+                                <td style="vertical-align: middle;">@totlaOrderCost LE</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @using (Html.BeginForm("ChangeState", "Order"))
+            {
+                <div class="row">
+                    <div style="width:70%" class="col-md-4">
+
+                        <div style="padding:0" class="col-lg-10">
+                            <select style="margin:0" onchange="myFunction()" class="form-control" id="select" name="SuplierId">
+                                <option value="null">Change state</option>
+                                <option value="Just orderd">just orderd</option>
+                                <option value="In progress">In progress</option>
+                                <option value="Done">Done</option>
+                            </select>
+                        </div>
+                    </div>
+                    <input type="hidden" value="@Model.Id" name="id" />
+                </div>
+                <div class="row">
+                    <div style="margin-top:5px" class="col-md-4">
+                        <button id="AddBTN" disabled="true" type="submit" class="btn btn-primary disabled">Change</button>
+                    </div>
+                </div>
+            }
+        </div>
+        
+    </div>
+</div>
+
+<script>
+    function myFunction() {
+
+        if (document.getElementById("select").value == "null") {
+            document.querySelector('#AddBTN').disabled = true;
+            document.querySelector('#AddBTN').className = "btn btn-primary disabled";
+
+        } else {
+            document.querySelector('#AddBTN').disabled = false;
+            document.querySelector('#AddBTN').className = "btn btn-primary";
+
+        }
+
+    }
+</script>

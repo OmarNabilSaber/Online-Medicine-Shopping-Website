@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "AddNewProductForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="display: flex;  justify-content: center; " class="modal-dialog" role="document">
+    @using (Html.BeginForm("AddNewProduct", "Product"))
+    {
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                <h2 style="width:300px ;font-family: Arial ; font-size: x-large" class="modal-title" id="UpdateModalLabel">Add new product</h2>
+
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+
+                    <fieldset>
+
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-lg-2 control-label">Name</label>
+                            <div class="col-lg-10">
+                                <input style=" width: 400px;" type="text" class="form-control" placeholder="Name" name="Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-lg-2 control-label">Cost</label>
+                            <div class="col-lg-10">
+                                <input  type="number" min="0" class="form-control" id="inputEmail" placeholder="Cost" name="Cost">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputPassword" class="col-lg-2 control-label">Discount</label>
+                            <div class="col-lg-10">
+                                <input  type="number" class="form-control" min="0" max="99" placeholder="Discount" name="Discount">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-lg-2 control-label">Price</label>
+                            <div class="col-lg-10">
+                                <input type="number" min="0" class="form-control" placeholder="Price" name="Price">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-lg-2 control-label">Quantity</label>
+                            <div class="col-lg-10">
+                                <input type="number" min="0" class="form-control" placeholder="Quantity" name="Quantity">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-lg-2 control-label">Type</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" placeholder="type" name="type">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-lg-2 control-label">Image</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" placeholder="Url" name="imgUrl">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="textArea" class="col-lg-2 control-label">Description</label>
+                            <div class="col-lg-10">
+                                <grammarly-extension data-grammarly-shadow-root="true" style="position: absolute; top: 0px; left: 0px; pointer-events: none;" class="cGcvT"></grammarly-extension><grammarly-extension data-grammarly-shadow-root="true" style="mix-blend-mode: darken; position: absolute; top: 0px; left: 0px; pointer-events: none;" class="cGcvT"></grammarly-extension>
+                                <textarea name="Description" placeholder="Description" class="form-control" rows="3" id="textArea" spellcheck="false"></textarea>
+                            </div>
+                        </div>
+                        
+                    </fieldset>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+                @Html.ActionLink("Cancle", "Index", "Admin", new { id = "" }, new { @class = "btn btn-secondary" })
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    }
+</div>

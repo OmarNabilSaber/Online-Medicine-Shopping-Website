@@ -1,0 +1,62 @@
+﻿@using Online_Medicine_Shopping_Website.Models
+@model Online_Medicine_Shopping_Website.Models.User
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    th {
+        font-size: 21px;
+        width: 25%
+    }
+
+    tr {
+        font-size: large
+    }
+</style>
+<div class="jumbotron">
+    <h1>Profile</h1>
+    <table style="width: 100%; border-top: 2px solid #808080; border-bottom: 2px solid #808080" class="table table-striped table-hover ">
+
+        <tbody>
+
+
+            <tr class="info">
+                <th>Frist Name</th>
+                <td>@Model.FristName</td>
+            </tr>
+            <tr class="warning">
+                <th>Last Name</th>
+                <td>@Model.LastName</td>
+            </tr>
+            <tr class="info">
+                <th>Phone</th>
+                <td>@Model.Phone</td>
+            </tr>
+            <tr class="warning">
+                <th>Adress</th>
+                <td>@Model.Adress</td>
+            </tr>
+            <tr class="info">
+                <th>Email</th>
+                <td>@Model.Email</td>
+            </tr>
+            <tr class="warning">
+                <th>Password</th>
+                <td>@Model.Password</td>
+            </tr>
+            <tr class="info">
+                <th>Visa number</th>
+                <td>@Model.VisaNumper</td>
+            </tr>
+            <tr class="warning">
+                <th>Cvv</th>
+                <td>@Model.Cvv</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    @Html.ActionLink("Update" , "Edit" , "User" , new { id = Model.Id} , new { @class = "btn btn-primary"})
+  
+</div>

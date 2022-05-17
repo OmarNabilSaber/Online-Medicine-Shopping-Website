@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>The pharmacy group</h1>
+    <p class="lead">We are always here for you.</p>
+    <p><a href="@Url.Action("Contact")" class="btn btn-primary btn-lg">Contact Us &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>skincare</h2>
+        <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gh-best-skincare-products-1628607809.png">
+        <p>Original skincare products.</p>
+        <p><a class="btn btn-default" href="@Url.Action("skincareProducts","Search","")">See more &raquo;</a></p>
+    </div>
+
+
+    <div class="col-md-4">
+        <h2>Offers</h2>
+        <img src="https://images-eu.ssl-images-amazon.com/images/G/31/img17/Pantry/April19SVD/COOP/HUL/PantrySummerSale_750x375.jpg">
+        <p>Offers UP To 30%.</p>
+        <p><a class="btn btn-default" href="@Url.Action("recommendOffers","Search","")">See more &raquo;</a></p>
+    </div>
+
+    
+    <div class="col-md-4">
+
+        <h2>free delivery</h2>
+        <img src="https://www.kindpng.com/picc/m/69-693702_collection-of-home-free-home-delivery-logo-hd.png">
+
+
+    </div>
+
+</div>

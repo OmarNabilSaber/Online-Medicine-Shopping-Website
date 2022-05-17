@@ -1,0 +1,33 @@
+﻿<nav class="navbar navbar-default" id="Usernav">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="@Url.Action("Index","Admin")" class="navbar-brand">The pharmacy</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active">@Html.ActionLink("Home", "Index", "Admin")</li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @if (!Online_Medicine_Shopping_Website.Models.UserInfo.Logedin)
+                {
+                    <li>@Html.ActionLink("SignIn", "DefaultSignIn", "Home")</li>
+                    <li>@Html.ActionLink("SignUp", "SignUp", "Home")</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Profile", "ViewAdminData", "Admin")</li>
+                    <li>@Html.ActionLink("SignOut", "SignOut", "Home")</li>
+                }
+
+            </ul>
+        </div>
+    </div>
+</nav>
+

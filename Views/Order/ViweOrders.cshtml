@@ -1,0 +1,94 @@
+﻿@model Online_Medicine_Shopping_Website.viewModels.Orders
+@{
+    ViewBag.Title = "ViweOrders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    float totalProductCost = 0;
+    float newPrice;
+    float totlaOrderCost = 0;
+}
+
+@if (Model.orders.Count < 1)
+{
+    <div style="height:450px" class="row">
+        <h1 style="margin-top: 20px ; margin-bottom : 50px">Empty..</h1>
+        @Html.ActionLink("New Order ", "Index", "Home", new { id = "" }, new { @class = "btn btn-default btn-lg btn-block" })
+    </div>
+
+}
+else
+{
+    foreach (var c in Model.orders)
+    {
+        <div style="background-color:#efefef" class="jumbotron">
+            <div class="row">
+
+                <div style="width:70%" class="col-md-4">
+                    <table class="table table-striped table-hover ">
+                        <thead>
+                            <tr class="header">
+
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Discount</th>
+                                <th>totalCost</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var i in c.Products)
+                            {
+                                newPrice = i.Price - ((i.Price / 100) * i.Discount);
+                                totalProductCost = i.Quantity * newPrice;
+                                <tr class="warning">
+
+                                    <td style="vertical-align: middle;"> @i.Name</td>
+                                    <td style="vertical-align: middle;"> @i.Price</td>
+                                    <td style="vertical-align: middle;"> @i.Quantity</td>
+                                    <td style="vertical-align: middle;"> @i.Discount % off</td>
+                                    <td style="vertical-align: middle;"> @totalProductCost</td>
+                                    <td>@Html.ActionLink("More", "ProductDetails", "Product", new { Id = @i.Id }, new { @class = "btn btn-primary btn-sm" })</td>
+
+                                </tr>
+                                totlaOrderCost += totalProductCost;
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div style="width:30%" class="col-md-4">
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Order Details</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped table-hover ">
+
+                                <tbody>
+                                    <tr class="">
+                                        <td style="vertical-align: middle;">Date</td>
+                                        <td style="vertical-align: middle;">@c.date</td>
+                                    </tr>
+                                    <tr class="">
+                                        <td style="vertical-align: middle;">State</td>
+                                        <td style="vertical-align: middle;">@c.state</td>
+                                    </tr>
+                                    <tr class="">
+                                        <td style="vertical-align: middle;">Total cost</td>
+                                        <td style="vertical-align: middle;">@totlaOrderCost</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    }
+
+}

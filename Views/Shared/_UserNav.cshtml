@@ -1,0 +1,49 @@
+﻿
+<nav class="navbar navbar-default" id="Usernav">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="@Url.Action("Index")" class="navbar-brand">The pharmacy</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                
+            </ul>
+            <div class="navbar-form navbar-left">
+
+                @using (Html.BeginForm("SearchResult", "Search"))
+                {
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search" name="medicineName">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                }
+
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                @if (!Online_Medicine_Shopping_Website.Models.UserInfo.Logedin)
+                {
+                    <li>@Html.ActionLink("SignIn", "LogIn", "LogIn")</li>
+                    <li>@Html.ActionLink("SignUp", "Create", "Regestration")</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Orders", "ViweOrders", "Order")</li>
+                    <li>@Html.ActionLink("Cart", "ViewCart", "Cart")</li>
+                    <li>@Html.ActionLink("Profile", "ViewProfile", "User")</li>
+                    <li>@Html.ActionLink("SignOut", "SignOut", "Home")</li>
+                }
+
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,209 @@
+﻿@using Online_Medicine_Shopping_Website.Models
+@model Online_Medicine_Shopping_Website.viewModels.suplierAndStock
+
+@{
+    ViewBag.Title = "moreSuplierDetilse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    th {
+        font-size: 17px;
+        width: 30%
+    }
+
+    tr {
+        font-size: large
+    }
+</style>
+<div class="row">
+    <div style="width:60%" class="col-md-4">
+
+        <h1 style=" font-family : Arial;font-size:35px">Suplier information</h1>
+        <table style="width: 100%; border-top: 2px solid #808080; border-bottom: 2px solid #808080" class="table table-striped table-hover ">
+
+            <tbody>
+
+
+                <tr class="info">
+                    <th>Frist Name</th>
+                    <td>@Model.suplier.FristName</td>
+                </tr>
+                <tr class="warning">
+                    <th>Last Name</th>
+                    <td>@Model.suplier.LastName</td>
+                </tr>
+                <tr class="info">
+                    <th>Phone</th>
+                    <td>@Model.suplier.Phone</td>
+                </tr>
+                <tr class="warning">
+                    <th>Adress</th>
+                    <td>@Model.suplier.Adress</td>
+                </tr>
+                <tr class="info">
+                    <th>Email</th>
+                    <td>@Model.suplier.Email</td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <!-- Button trigger modal -->
+        <button style="font-family : Arial" type="button" class="btn btn-primary" data-toggle="modal" data-target="#UpdateModal">
+            Update
+        </button>
+        @Html.ActionLink("Remove", "RemoveSuplier", "Suplier", new { id = Model.suplier.Id }, new { @class = "btn btn-primary" })
+
+    </div>
+    <div style="width:40%" class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 style=" font-family : Arial;font-size:30px" class="panel-title">Products</h1>
+            </div>
+            <div class="panel-body">
+
+                <table class="table table-striped table-hover ">
+                    <thead>
+                        <tr class="header">
+                            <th>ID</th>
+                            <th>Name</th>
+                    </thead>
+                    <tbody>
+
+
+                        @foreach (var i in Model.suplier.productsInfo)
+                        {
+
+                            <tr class="">
+                                <td style="vertical-align: middle;">@i.Id</td>
+                                <td style="vertical-align: middle;">@i.Name</td>
+                                <td style="vertical-align: middle;">@Html.ActionLink("More", "ProductDetails", "Product", new { Id = @i.Id }, new { @class = "btn btn-primary btn-xs" })</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        @using (Html.BeginForm("AddprodutToSublier", "Suplier"))
+        {
+            <div class="row">
+                <div style="width:70%" class="col-md-4">
+
+                    <div class="col-lg-10">
+                        <select onchange="myFunction()" class="form-control" id="select" name="ProductId">
+                            <option value="null">Add another</option>
+                            @foreach (var i in Model.stockProducts.products)
+                            {
+
+                                <option value="@i.Id">@i.Name</option>
+                            }
+
+                        </select>
+                        <input type="hidden" value="@Model.suplier.Id" name="SublierId" />
+                    </div>
+                </div>
+
+                <div style="width:30%" class="col-md-4">
+                    <button id="AddBTN" disabled="true" type="submit" class="btn btn-primary disabled">Add</button>
+                </div>
+            </div>
+        }
+
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="UpdateModalLabel" aria-hidden="true">
+        <div style="display: flex;  justify-content: center; " class="modal-dialog" role="document">
+            @using (Html.BeginForm("UpdateSuplier", "Suplier"))
+            {
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button style="padding:5px" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h2 style=" width:300px;font-family: Arial ; font-size: x-large" class="modal-title" id="UpdateModalLabel">Update Suplier data</h2>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+
+                            <fieldset>
+
+                                <div class="form-group">
+                                    <label for="inputEmail" class="col-lg-2 control-label">Frist Name</label>
+                                    <div class="col-lg-10">
+                                        <input value="@Model.suplier.FristName" type="text" class="form-control" placeholder="Frist Name" name="Frist_Name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail" class="col-lg-2 control-label">Last Name</label>
+                                    <div class="col-lg-10">
+                                        <input value="@Model.suplier.LastName" type="text" class="form-control" placeholder="Last Name" name="Last_Name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail" class="col-lg-2 control-label">Phone Number</label>
+                                    <div class="col-lg-10">
+                                        <input value="@Model.suplier.Phone" type="text" class="form-control" placeholder="Phone Number" name="Phone">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail" class="col-lg-2 control-label">Adress</label>
+                                    <div class="col-lg-10">
+                                        <input value="@Model.suplier.Adress" type="text" class="form-control" placeholder="Adress" name="Adress">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                                    <div class="col-lg-10">
+                                        <input value="@Model.suplier.Email" type="text" class="form-control" id="inputEmail" placeholder="Email" name="Email">
+                                    </div>
+                                </div>
+                                <input value="@Model.suplier.Id" type="hidden" name="Id" />
+
+                            </fieldset>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script>
+    $('#UpdateModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var recipient = button.data('whatever')
+        var modal = $(this)
+        modal.find('.modal-title').text('New message to ' + recipient)
+        modal.find('.modal-body input').val(recipient)
+    })
+
+</script>
+
+<script>
+    function myFunction() {
+
+        if (document.getElementById("select").value == "null") {
+            document.querySelector('#AddBTN').disabled = true;
+            document.querySelector('#AddBTN').className = "btn btn-primary disabled";
+
+        } else {
+            document.querySelector('#AddBTN').disabled = false;
+            document.querySelector('#AddBTN').className = "btn btn-primary";
+
+        }
+
+    }
+</script>
+
+
+
